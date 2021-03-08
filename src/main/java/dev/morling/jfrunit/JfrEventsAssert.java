@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 The JfrUnit authors
+ *  Copyright 2020 - 2021 The JfrUnit authors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,16 +31,20 @@ public class JfrEventsAssert extends AbstractAssert<JfrEventsAssert, JfrEvents> 
         isNotNull();
 
         boolean found = actual.getEvents()
-            .filter(re -> ExpectedEvent.matches(expectedEvent, re))
-            .findAny()
-            .isPresent();
+            .anyMatch(re -> ExpectedEvent.matches(expectedEvent, re));
 
         if (!found) {
-            if (expectedEvent.getProps().isEmpty()) {
+            if (expectedEvent.getWithProps().isEmpty() && expectedEvent.getHasProps().isEmpty() && expectedEvent.getHasNotProps().isEmpty()) {
                 failWithMessage("No JFR event of type <%s>", expectedEvent.getName());
             }
+            else if(!expectedEvent.getHasProps().isEmpty()) {
+                failWithMessage("No JFR event of type <%s> with attributes <%s>", expectedEvent.getName(), expectedEvent.getHasProps());
+            }
+            else if(!expectedEvent.getHasNotProps().isEmpty()) {
+                failWithMessage("No JFR event of type <%s> without attributes <%s>", expectedEvent.getName(), expectedEvent.getHasNotProps());
+            }
             else {
-                failWithMessage("No JFR event of type <%s> with attributes <%s>", expectedEvent.getName(), expectedEvent.getProps());
+                failWithMessage("No JFR event of type <%s> with attributes <%s>", expectedEvent.getName(), expectedEvent.getWithProps());
             }
         }
 

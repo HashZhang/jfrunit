@@ -17,7 +17,9 @@ before they manifest as performance regressions in production.
 
 ## Usage
 
-This project requires OpenJDK 14 or later at runtime.
+This project requires OpenJDK 15 or later at runtime.
+Support for JDK 11 is on the roadmap, JfrUnit couldn't rely on JFR event stream in this case though, but would have to read JFR events from a recording persisted to disk.
+A PR contributing this change would be very welcomed.
 
 JfrUnit is not yet available from Maven Central yet;
 in the meantime you can obtain snapshot builds from [JitPack](https://jitpack.io).
@@ -26,7 +28,7 @@ To do so, add the following dependency to your project's _pom.xml_:
 ```xml
 ...
 <dependency>
-  <groupId>com.github.gunnarmorling</groupId>
+  <groupId>com.github.moditect</groupId>
   <artifactId>jfrunit</artifactId>
   <version>main-SNAPSHOT</version>
 </dependency>
@@ -48,6 +50,11 @@ Alternatively, build JfrUnit from source (see below) yourself and add the follow
 Then you can implement tests expecting specific JFR events like so:
 
 ```java
+import dev.morling.jfrunit.*;
+
+import static dev.morling.jfrunit.JfrEventsAssert.*;
+import static dev.morling.jfrunit.ExpectedEvent.*;
+
 @JfrEventTest
 public class JfrTest {
 

@@ -15,17 +15,16 @@
  */
 package dev.morling.jfrunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import jdk.jfr.Category;
+import jdk.jfr.Event;
+import jdk.jfr.Name;
+import jdk.jfr.StackTrace;
 
-import org.junit.jupiter.api.extension.ExtendWith;
+@Name(StackTraceDisabledSampleEvent.EVENT_NAME)
+@Category("JfrUnit")
+@StackTrace(false)
+public class StackTraceDisabledSampleEvent extends Event {
 
-
-@Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(JfrEventTestExtension.class)
-@Target(ElementType.TYPE)
-public @interface JfrEventTest {
+    public static final String EVENT_NAME = "jfrunit.test.StackTraceDisabledSampleEvent";
 
 }

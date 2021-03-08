@@ -1,6 +1,6 @@
 <!--
 
-     Copyright 2020 The JfrUnit authors
+     Copyright 2020 - 2021 The JfrUnit authors
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
-    <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
+    <maven.compiler.source>15</maven.compiler.source>
+    <maven.compiler.target>15</maven.compiler.target>
+    <quarkus.platform.version>1.12.1.Final</quarkus.platform.version>
   </properties>
 
   <licenses>
@@ -124,7 +124,7 @@
           <execution>
             <id>default-testCompile</id>
             <configuration>
-              <release>14</release>
+              <release>15</release>
             </configuration>
           </execution>
         </executions>

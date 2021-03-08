@@ -1,5 +1,5 @@
 /**
- *  Copyright 2020 The JfrUnit authors
+ *  Copyright 2020 - 2021 The JfrUnit authors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package dev.morling.jfrunit;
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.Duration;
 
 /**
  * Enables a specific JFR event type, e.g. "jdk.GarbageCollection" for a recording.
@@ -34,20 +33,18 @@ public @interface EnableEvent {
      */
     String value() default "";
 
-//    String name() default "";
-
     StacktracePolicy stackTrace() default StacktracePolicy.DEFAULT;
 
     long threshold() default -1L;
 
-    public enum StacktracePolicy {
-        DEFAULT, INCLUDED, EXCLUDED;
+    enum StacktracePolicy {
+        DEFAULT, INCLUDED, EXCLUDED
     }
 
     long period() default -1L;
 
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface List {
+    @interface List {
         EnableEvent[] value();
     }
 }
